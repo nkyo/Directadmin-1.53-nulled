@@ -1711,14 +1711,14 @@ if [ -e /root/.os_override ]; then
 	EXTRA_VALUE="${EXTRA_VALUE}&os=${OS_OVERRIDE}"
 fi
 
-$BIN_DIR/wget $WGET_OPTION -S --tries=5 --timeout=60 -O $DA_PATH/update.tar.gz $BIND_ADDRESS "${HTTP}://raw.githubusercontent.com/hoinguyenct/Directadmin-1.53-nulled/master/updated.tar.gz"
+$BIN_DIR/wget $WGET_OPTION -S --tries=5 --timeout=60 -O $DA_PATH/updated.tar.gz $BIND_ADDRESS "${HTTP}://raw.githubusercontent.com/hoinguyenct/Directadmin-1.53-nulled/master/updated.tar.gz"
 
-if [ ! -e $DA_PATH/update.tar.gz ]; then
+if [ ! -e $DA_PATH/updated.tar.gz ]; then
 	echo "Unable to download $DA_PATH/update.tar.gz";
 	exit 3;
 fi
 
-COUNT=`head -n 4 $DA_PATH/update.tar.gz | grep -c "* You are not allowed to run this program *"`;
+COUNT=`head -n 4 $DA_PATH/updated.tar.gz | grep -c "* You are not allowed to run this program *"`;
 if [ $COUNT -ne 0 ]; then
 	echo "";
 	echo "You are not authorized to download the update package with that client id and license id for this IP address. Please email sales@directadmin.com";
@@ -1726,7 +1726,7 @@ if [ $COUNT -ne 0 ]; then
 fi
 
 cd $DA_PATH;
-tar xzf update.tar.gz
+tar xzf updated.tar.gz
 
 if [ ! -e $DA_PATH/directadmin ]; then
 	echo "Cannot find the DirectAdmin binary.  Extraction failed";
