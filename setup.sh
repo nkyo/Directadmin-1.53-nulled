@@ -190,7 +190,8 @@ elif [ -e $DEBIAN_VERSION ]; then
 		#should be 6.0, but used to be 5.
 	fi
 	if [ "$OS_VER" = "wheezy/sid" ]; then
-		OS_VER=7.0
+		OS_VER=
+		
 	fi
 
 	if [ "$OS_VER" = "jessie/sid" ]; then
@@ -282,7 +283,7 @@ if [ "$OS" = "fedora" ]; then
 			;;
 		6|6.0) SERVICES=services_fedora6.tar.gz
 			;;
-                7|7.0|8|8.0) SERVICES=services_fedora7.tar.gz
+                7|7.2|8|8.0) SERVICES=services_fedora7.tar.gz
                         ;;
 		9|9.0) SERVICES=services_fedora9.tar.gz
 			;;
@@ -296,7 +297,7 @@ elif [ "$OS" = "debian" ]; then
 				;;
 			6.0|6.1|6) SERVICES=services_debian60_64.tar.gz
 				;;
-			7|7.0|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) SERVICES=services_debian70_64.tar.gz
+			7|7.2|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) SERVICES=services_debian70_64.tar.gz
 				;;
 			8|8.0|8.1|8.2|8.3|8.4|8.5|8.6|8.7|8.8|8.9|8.10|8.11)	SERVICES=services_debian80_64.tar.gz
 						MUST_CB2=yes
@@ -317,7 +318,7 @@ elif [ "$OS" = "debian" ]; then
 				;;
 			6|6.0|6.1) SERVICES=services_debian60.tar.gz
 				;;
-			7|7.0|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) SERVICES=services_debian70.tar.gz
+			7|7.2|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) SERVICES=services_debian70.tar.gz
 				;;
 			8|8.0|8.1|8.2|8.3|8.4|8.5|8.6|8.7|8.8|8.9|8.10|8.11)	SERVICES=services_debian80.tar.gz
 						MUST_CB2=yes
@@ -349,14 +350,14 @@ elif [ "$OS" = "FreeBSD" ] && [ "$B64" -eq 0 ]; then
 			;;
 		6.0|6.1|6.2|6.3|6.4) SERVICES=services_freebsd60.tar.gz
 			;;
-		7|7.0|7.1|7.2|7.3|7.4|7.5) SERVICES=services_freebsd70.tar.gz
+		7|7.2|7.1|7.2|7.3|7.4|7.5) SERVICES=services_freebsd70.tar.gz
 			;;
 		9|9.0|9.1|9.2|9.3) SERVICES=services_freebsd90.tar.gz
 			;;
 	esac
 elif [ "$OS" = "FreeBSD" ] && [ "$B64" -eq 1 ]; then
         case "$OS_VER" in
-                7|7.0|7.1|7.2|7.3|7.4|7.5) SERVICES=services_freebsd71_64.tar.gz
+                7|7.2|7.1|7.2|7.3|7.4|7.5) SERVICES=services_freebsd71_64.tar.gz
                         ;;
 		8|8.0|8.1|8.2|8.3|8.4|8.5) SERVICES=services_freebsd80_64.tar.gz
 			;;
@@ -373,7 +374,7 @@ elif [ $B64 -eq 1 ]; then
 			;;
 		6|6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9) SERVICES=services_es60_64.tar.gz
 			;;
-		7|7.0|7.1|7.2|7.3|7.4|7.5|7.6)	SERVICES=services_es70_64.tar.gz
+		7|7.2|7.1|7.2|7.3|7.4|7.5|7.6)	SERVICES=services_es70_64.tar.gz
 					MUST_CB2=yes
 			;;
 	esac
@@ -395,7 +396,7 @@ else
 			;;
 		6|6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9) SERVICES=services_es60.tar.gz
 			;;
-		7|7.0|7.1|7.2|7.3|7.4|7.5|7.6)	SERVICES=services_es70.tar.gz
+		7|7.2|7.1|7.2|7.3|7.4|7.5|7.6)	SERVICES=services_es70.tar.gz
 					MUST_CB2=yes
 			;;
 	esac
@@ -779,7 +780,7 @@ if [ $CMD_LINE -eq 0 ]; then
 		onetwo=1
 	elif [ "${SERVICES}" = "services_debian90_64.tar.gz" ]; then
 		onetwo=1
-		PHP_V_DEF=7.0
+		PHP_V_DEF=7.2
 		PHP_M_DEF=php-fpm
 		PHP_RUID_DEF=no
 	else
@@ -1007,7 +1008,7 @@ if [ $WGET -eq 0 ]; then
 
 		if [ "$B64" -eq 1 ]; then
 			case "$OS_VER" in
-				7.0|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7.1-release/Latest/wget.tbz
+				7.2|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7.1-release/Latest/wget.tbz
 					;;
 				8.0|8.1|8.2|8.3|8.4|8.5) pkg_add -r http://$FTP_HOST/services/packages-8.0-release/Latest/wget.tbz
 					;;
@@ -1018,7 +1019,7 @@ if [ $WGET -eq 0 ]; then
 		else
 
 			case "$OS_VER" in
-				7.0|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7-stable/Latest/wget.tbz
+				7.2|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7-stable/Latest/wget.tbz
 					;;
 				6.0|6.1|6.2|6.3|6.4) pkg_add -r http://$FTP_HOST/services/packages-6-stable/Latest/wget.tbz
 					;;
@@ -1095,7 +1096,7 @@ FILES=$SCRIPTS_PATH/files.sh
 				;;
 			6) OS_VER=6.0
 				;;
-			7|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) OS_VER=7.0
+			7|7.1|7.2|7.3|7.4|7.5|7.6|7.7|7.8|7.9|7.10|7.11) OS_VER=7.2
 				;;
 			8|8.0|8.1|8.2|8.3|8.4|8.5|8.6|8.7|8.8|8.9|8.10|8.11) OS_VER=8.0
 				;;
@@ -1122,7 +1123,7 @@ FILES=$SCRIPTS_PATH/files.sh
 				;;
 			6|6.0) FILES_PATH=fedora_6
 				;;
-			7|7.0) FILES_PATH=fedora_7
+			7|7.2) FILES_PATH=fedora_7
 				;;
 			8|8.0) FILES_PATH=fedora_8
 				;;
@@ -1138,7 +1139,7 @@ FILES=$SCRIPTS_PATH/files.sh
 				;;
 			6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9) FILES_PATH=es_6.0_64
 				;;
-			7.0|7.1|7.2|7.3|7.4|7.5|7.6) FILES_PATH=es_7.0_64
+			7.2|7.1|7.2|7.3|7.4|7.5|7.6) FILES_PATH=es_7.2_64
 				;;
 		esac
 	elif [ "$OS" = "Enterprise" ]; then
@@ -1149,7 +1150,7 @@ FILES=$SCRIPTS_PATH/files.sh
 				;;
 			6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9) FILES_PATH=es_6.0
 				;;
-			7.0|7.1|7.2|7.3|7.4|7.5|7.6) FILES_PATH=es_7.0
+			7.2|7.1|7.2|7.3|7.4|7.5|7.6) FILES_PATH=es_7.2
 				;;
 		esac
 	else
@@ -1184,7 +1185,7 @@ addPackage()
 	if [ "$OS" = "FreeBSD" ]; then
 		if [ "$B64" -eq 1 ]; then
 			case "$OS_VER" in
-				7|7.0|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7.1-release/Latest/${1}.tbz
+				7|7.2|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7.1-release/Latest/${1}.tbz
 					;;
 				8|8.0|8.1|8.2|8.3|8.4|8.5) pkg_add -r http://$FTP_HOST/services/packages-8.0-release/Latest/${1}.tbz
 					;;
@@ -1193,7 +1194,7 @@ addPackage()
 			esac
 		else
 	                case "$OS_VER" in
-				7|7.0|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7-stable/Latest/${1}.tbz
+				7|7.2|7.1|7.2|7.3|7.4|7.5) pkg_add -r http://$FTP_HOST/services/packages-7-stable/Latest/${1}.tbz
 					;;
 				6.0|6.1|6.2|6.3|6.4) pkg_add -r http://$FTP_HOST/services/packages-6-stable/Latest/${1}.tbz
 					;;
@@ -1243,7 +1244,7 @@ addPackage()
 
 if [ $PERL -eq 0 ]; then
 	case "$OS_VER" in
-		5.3|5.4|5.5|5.6|5.7|5.8|5.9|5.10|5.11|6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9|7|7.0|7.1|7.2|7.3|7.4|7.5|7.6|8|8.0|8.1|8.2|8.3|8.4|8.5)	addPackage perl "$perl";
+		5.3|5.4|5.5|5.6|5.7|5.8|5.9|5.10|5.11|6.0|6.1|6.2|6.3|6.4|6.5|6.6|6.7|6.8|6.9|7|7.2|7.1|7.2|7.3|7.4|7.5|7.6|8|8.0|8.1|8.2|8.3|8.4|8.5)	addPackage perl "$perl";
 			;;
 		5.0|5.1|5.2)		addPackage perl5.6 $perl;
 			;;
@@ -1316,7 +1317,7 @@ if [ $WEBALIZER -eq 0 ]; then
 
 		if [ "$B64" -eq 1 ]; then
 			case "$OS_VER" in
-				7|7.0|7.1|7.2|7.3|7.4|7.5) wget -O $WEBALIZER_FILE $SERVER/freebsd7.1-64bit/webalizer
+				7|7.2|7.1|7.2|7.3|7.4|7.5) wget -O $WEBALIZER_FILE $SERVER/freebsd7.1-64bit/webalizer
 					;;
 				8|8.0|8.1|8.2|8.3|8.4|8.5) wget -O $WEBALIZER_FILE $SERVER/freebsd8.0-64bit/webalizer
 					;;
@@ -1329,7 +1330,7 @@ if [ $WEBALIZER -eq 0 ]; then
 					;;
 				6.0|6.1|6.2|6.3|6.4) wget -O $WEBALIZER_FILE $SERVER/freebsd6.0/webalizer
 					;;
-				7|7.0|7.1|7.2|7.3|7.4|7.5) wget -O $WEBALIZER_FILE $SERVER/freebsd7.0/webalizer
+				7|7.2|7.1|7.2|7.3|7.4|7.5) wget -O $WEBALIZER_FILE $SERVER/freebsd7.2/webalizer
 					;;
 			esac
 		fi
@@ -1661,9 +1662,9 @@ if [ -e /root/.my.cnf ]; then
 fi
 
 #ensure /etc/hosts has localhost
-COUNT=`grep 127.0.0.1 /etc/hosts | grep -c localhost`
+COUNT=`grep 127.2.0.1 /etc/hosts | grep -c localhost`
 if [ "$COUNT" -eq 0 ]; then
-	echo -e "127.0.0.1\t\tlocalhost" >> /etc/hosts
+	echo -e "127.2.0.1\t\tlocalhost" >> /etc/hosts
 fi
 
 if [ "$OS" != "FreeBSD" ]; then
